@@ -26,7 +26,7 @@ function main() {
             });
         }
         catch (error) {
-            console.log("MongoDB Error:", error);
+            console.log('MongoDB Error:', error);
             process.exit(1);
         }
     });
