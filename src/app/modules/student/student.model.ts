@@ -37,10 +37,13 @@ const guardianSchema = new Schema<Guardian>(
     },
     fatherContactNo: {
       type: String,
+      trim: true,
       required: true,
     },
     fatherEmail: {
       type: String,
+      trim: true,
+      lowercase: true,
     },
     motherName: {
       type: String,
@@ -52,10 +55,13 @@ const guardianSchema = new Schema<Guardian>(
     },
     motherContactNo: {
       type: String,
+      trim: true,
       required: true,
     },
     motherEmail: {
       type: String,
+      trim: true,
+      lowercase: true,
     },
   },
   {
@@ -75,10 +81,13 @@ const localGuardianSchema = new Schema<LocalGuardian>(
     },
     contactNo: {
       type: String,
+      trim: true,
       required: true,
     },
     email: {
       type: String,
+      trim: true,
+      lowercase: true,
     },
   },
   {
@@ -91,6 +100,7 @@ const studentSchema = new Schema<Student>(
     id: {
       type: String,
       required: true,
+      unique: true,
     },
     name: {
       type: userNameSchema,
@@ -107,14 +117,19 @@ const studentSchema = new Schema<Student>(
     },
     email: {
       type: String,
+      trim: true,
+      unique: true,
+      lowercase: true,
       required: true,
     },
     contactNo: {
       type: String,
+      trim: true,
       required: true,
     },
     emergencyContactNo: {
       type: String,
+      trim: true,
       required: true,
     },
     bloodGroup: {

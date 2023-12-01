@@ -14,6 +14,8 @@ const userNameSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
+}, {
+    _id: false,
 });
 const guardianSchema = new mongoose_1.Schema({
     fatherName: {
@@ -46,6 +48,8 @@ const guardianSchema = new mongoose_1.Schema({
     motherEmail: {
         type: String,
     },
+}, {
+    _id: false,
 });
 const localGuardianSchema = new mongoose_1.Schema({
     name: {
@@ -63,17 +67,22 @@ const localGuardianSchema = new mongoose_1.Schema({
     email: {
         type: String,
     },
+}, {
+    _id: false,
 });
 const studentSchema = new mongoose_1.Schema({
     id: {
         type: String,
         required: true,
     },
-    name: userNameSchema,
+    name: {
+        type: userNameSchema,
+        required: true,
+    },
     gender: {
         type: String,
         enum: ['male', 'female', 'other'],
-        required: true
+        required: true,
     },
     dateOfBirth: {
         type: String,
@@ -93,7 +102,7 @@ const studentSchema = new mongoose_1.Schema({
     },
     bloodGroup: {
         type: String,
-        enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+        enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
     },
     presentAddress: {
         type: String,
@@ -103,15 +112,21 @@ const studentSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
-    guardian: guardianSchema,
-    localGuardian: localGuardianSchema,
+    guardian: {
+        type: guardianSchema,
+        required: true,
+    },
+    localGuardian: {
+        type: localGuardianSchema,
+        required: true,
+    },
     profileImg: {
         type: String,
     },
     isActive: {
         type: String,
         enum: ['active', 'inactive'],
-        default: 'active'
+        default: 'active',
     },
 }, { timestamps: true });
 exports.StudentModel = (0, mongoose_1.model)('Student', studentSchema);
