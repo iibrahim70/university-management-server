@@ -4,11 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
+const cors_1 = __importDefault(require("cors"));
+const student_route_1 = require("./app/modules/student/student.route");
 // parsers
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
+// application routes
+app.use('/api/v1/students', student_route_1.studentRoutes);
+// default routes
 app.get('/', (req, res) => {
     res.send('Hello Dev!');
 });
@@ -18,13 +22,4 @@ app.all('*', (req, res) => {
         message: 'Route Not Found',
     });
 });
-// global error handler
-// app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-//   if (error) {
-//     res.status(400).json({
-//       success: false,
-//       message: "Something went wrong",
-//     });
-//   }
-// });
 exports.default = app;

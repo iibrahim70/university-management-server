@@ -1,105 +1,117 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.StudentModel = void 0;
 const mongoose_1 = require("mongoose");
 const userNameSchema = new mongoose_1.Schema({
     firstName: {
-        tyep: String,
+        type: String,
         required: true,
     },
     middleName: {
-        tyep: String,
+        type: String,
     },
     lastName: {
-        tyep: String,
+        type: String,
         required: true,
     },
 });
 const guardianSchema = new mongoose_1.Schema({
     fatherName: {
-        tyep: String,
+        type: String,
         required: true,
     },
     fatherOccupation: {
-        tyep: String,
+        type: String,
         required: true,
     },
     fatherContactNo: {
-        tyep: String,
+        type: String,
         required: true,
     },
     fatherEmail: {
-        tyep: String,
+        type: String,
     },
     motherName: {
-        tyep: String,
+        type: String,
         required: true,
     },
     motherOccupation: {
-        tyep: String,
+        type: String,
         required: true,
     },
     motherContactNo: {
-        tyep: String,
+        type: String,
         required: true,
     },
     motherEmail: {
-        tyep: String,
+        type: String,
     },
 });
 const localGuardianSchema = new mongoose_1.Schema({
     name: {
-        tyep: String,
+        type: String,
         required: true,
     },
     occupation: {
-        tyep: String,
+        type: String,
         required: true,
     },
     contactNo: {
-        tyep: String,
+        type: String,
         required: true,
     },
     email: {
-        tyep: String,
+        type: String,
     },
 });
 const studentSchema = new mongoose_1.Schema({
     id: {
-        tyep: String,
+        type: String,
         required: true,
     },
     name: userNameSchema,
-    gender: ['male', 'female'],
-    dataOfBirth: {
-        tyep: String,
+    gender: {
+        type: String,
+        enum: ['male', 'female', 'other'],
+        required: true
+    },
+    dateOfBirth: {
+        type: String,
         required: true,
     },
     email: {
-        tyep: String,
+        type: String,
         required: true,
     },
     contactNo: {
-        tyep: String,
+        type: String,
         required: true,
     },
     emergencyContactNo: {
-        tyep: String,
+        type: String,
         required: true,
     },
-    bloodGroup: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
-    presentAdress: {
-        tyep: String,
+    bloodGroup: {
+        type: String,
+        enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+    },
+    presentAddress: {
+        type: String,
         required: true,
     },
-    permanentAdress: {
-        tyep: String,
+    permanentAddress: {
+        type: String,
         required: true,
     },
     guardian: guardianSchema,
     localGuardian: localGuardianSchema,
     profileImg: {
-        tyep: String,
+        type: String,
     },
-    isActive: ['active', 'inactive'],
-});
-const Student = (0, mongoose_1.model)('Student', studentSchema);
+    isActive: {
+        type: String,
+        enum: ['active', 'inactive'],
+        default: 'active'
+    },
+}, { timestamps: true });
+exports.StudentModel = (0, mongoose_1.model)('Student', studentSchema);
