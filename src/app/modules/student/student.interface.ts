@@ -1,10 +1,10 @@
-export interface UserName {
+export interface IUserName {
   firstName: string;
   middleName?: string;
   lastName: string;
 }
 
-export interface Guardian {
+export interface IGuardian {
   fatherName: string;
   fatherOccupation: string;
   fatherContactNo: string;
@@ -15,16 +15,17 @@ export interface Guardian {
   motherEmail?: string;
 }
 
-export interface LocalGuardian {
+export interface ILocalGuardian {
   name: string;
   occupation: string;
   contactNo: string;
   email?: string;
 }
 
-export interface Student {
+export interface IStudent {
   id: string;
-  name: UserName;
+  name: IUserName;
+  password: string;
   gender: 'male' | 'female' | 'other';
   dateOfBirth: string;
   email: string;
@@ -33,8 +34,8 @@ export interface Student {
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   presentAddress: string;
   permanentAddress: string;
-  guardian: Guardian;
-  localGuardian: LocalGuardian;
+  guardian: IGuardian;
+  localGuardian: ILocalGuardian;
   profileImg?: string;
   isActive: 'active' | 'inactive';
 }

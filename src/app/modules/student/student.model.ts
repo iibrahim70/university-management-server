@@ -1,12 +1,14 @@
 import { Schema, model } from 'mongoose';
 import {
-  Guardian,
-  LocalGuardian,
-  Student,
-  UserName,
+  IGuardian,
+  ILocalGuardian,
+  IStudent,
+  IUserName,
 } from './student.interface';
+import bcrypt from 'bcrypt';
+import config from '../../config';
 
-const userNameSchema = new Schema<UserName>(
+const userNameSchema = new Schema<IUserName>(
   {
     firstName: {
       type: String,
@@ -25,7 +27,7 @@ const userNameSchema = new Schema<UserName>(
   },
 );
 
-const guardianSchema = new Schema<Guardian>(
+const guardianSchema = new Schema<IGuardian>(
   {
     fatherName: {
       type: String,
@@ -69,7 +71,7 @@ const guardianSchema = new Schema<Guardian>(
   },
 );
 
-const localGuardianSchema = new Schema<LocalGuardian>(
+const localGuardianSchema = new Schema<ILocalGuardian>(
   {
     name: {
       type: String,
@@ -95,7 +97,7 @@ const localGuardianSchema = new Schema<LocalGuardian>(
   },
 );
 
-const studentSchema = new Schema<Student>(
+const studentSchema = new Schema<IStudent>(
   {
     id: {
       type: String,
@@ -104,6 +106,11 @@ const studentSchema = new Schema<Student>(
     },
     name: {
       type: userNameSchema,
+      required: true,
+    },
+    password: {
+      type: String,
+      maxlength: 20,
       required: true,
     },
     gender: {
@@ -164,4 +171,23 @@ const studentSchema = new Schema<Student>(
   { timestamps: true },
 );
 
-export const StudentModel = model<Student>('Student', studentSchema);
+// pre save middleware
+studentSchema.pre('save', async function (next) {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const user = this;
+  // hashing password and save into db
+
+  user.password = await bcrypt.hash(
+    user.password,
+    Number(config.bcryptSaltRounds),
+  );
+  next();
+});
+
+// post save middleware
+studentSchema.post('save', function (doc, next) {
+  doc.password = '';
+  next();
+});
+
+export const Student = model<IStudent>('Student', studentSchema);

@@ -28,10 +28,13 @@ const guardianSchema = new mongoose_1.Schema({
     },
     fatherContactNo: {
         type: String,
+        trim: true,
         required: true,
     },
     fatherEmail: {
         type: String,
+        trim: true,
+        lowercase: true,
     },
     motherName: {
         type: String,
@@ -43,10 +46,13 @@ const guardianSchema = new mongoose_1.Schema({
     },
     motherContactNo: {
         type: String,
+        trim: true,
         required: true,
     },
     motherEmail: {
         type: String,
+        trim: true,
+        lowercase: true,
     },
 }, {
     _id: false,
@@ -62,10 +68,13 @@ const localGuardianSchema = new mongoose_1.Schema({
     },
     contactNo: {
         type: String,
+        trim: true,
         required: true,
     },
     email: {
         type: String,
+        trim: true,
+        lowercase: true,
     },
 }, {
     _id: false,
@@ -74,6 +83,7 @@ const studentSchema = new mongoose_1.Schema({
     id: {
         type: String,
         required: true,
+        unique: true,
     },
     name: {
         type: userNameSchema,
@@ -90,14 +100,19 @@ const studentSchema = new mongoose_1.Schema({
     },
     email: {
         type: String,
+        trim: true,
+        unique: true,
+        lowercase: true,
         required: true,
     },
     contactNo: {
         type: String,
+        trim: true,
         required: true,
     },
     emergencyContactNo: {
         type: String,
+        trim: true,
         required: true,
     },
     bloodGroup: {

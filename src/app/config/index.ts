@@ -7,4 +7,5 @@ export default {
   port: process.env.PORT,
   mongoURI: process.env.MONGO_URI,
   dbName: process.env.DB_Name,
+  bcryptSaltRounds: process.env.BCRYPT_SALT_ROUNDS,
 };
