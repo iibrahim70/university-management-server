@@ -26,13 +26,13 @@ export interface Student {
   id: string;
   name: UserName;
   gender: 'male' | 'female';
-  dataOfBirth: string;
+  dateOfBirth: string;
   email: string;
   contactNo: string;
   emergencyContactNo: string;
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
-  presentAdress: string;
-  permanentAdress: string;
+  presentAddress: string;
+  permanentAddress: string;
   guardian: Guardian;
   localGuardian: LocalGuardian;
   profileImg?: string;

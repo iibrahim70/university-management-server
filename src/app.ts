@@ -1,11 +1,16 @@
 import express, { Request, Response } from 'express';
-import cors from 'cors';
 const app = express();
+import cors from 'cors';
+import { studentRoutes } from './app/modules/student/student.route';
 
 // parsers
 app.use(express.json());
 app.use(cors());
 
+// application routes
+app.use('/api/v1/students', studentRoutes);
+
+// default routes
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello Dev!');
 });
@@ -16,15 +21,5 @@ app.all('*', (req: Request, res: Response) => {
     message: 'Route Not Found',
   });
 });
-
-// global error handler
-// app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-//   if (error) {
-//     res.status(400).json({
-//       success: false,
-//       message: "Something went wrong",
-//     });
-//   }
-// });
 
 export default app;

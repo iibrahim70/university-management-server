@@ -8,107 +8,110 @@ import {
 
 const userNameSchema = new Schema<UserName>({
   firstName: {
-    tyep: String,
+    type: String,
     required: true,
   },
   middleName: {
-    tyep: String,
+    type: String,
   },
   lastName: {
-    tyep: String,
+    type: String,
     required: true,
   },
 });
 
 const guardianSchema = new Schema<Guardian>({
   fatherName: {
-    tyep: String,
+    type: String,
     required: true,
   },
   fatherOccupation: {
-    tyep: String,
+    type: String,
     required: true,
   },
   fatherContactNo: {
-    tyep: String,
+    type: String,
     required: true,
   },
   fatherEmail: {
-    tyep: String,
+    type: String,
   },
   motherName: {
-    tyep: String,
+    type: String,
     required: true,
   },
   motherOccupation: {
-    tyep: String,
+    type: String,
     required: true,
   },
   motherContactNo: {
-    tyep: String,
+    type: String,
     required: true,
   },
   motherEmail: {
-    tyep: String,
+    type: String,
   },
 });
 
 const localGuardianSchema = new Schema<LocalGuardian>({
   name: {
-    tyep: String,
+    type: String,
     required: true,
   },
   occupation: {
-    tyep: String,
+    type: String,
     required: true,
   },
   contactNo: {
-    tyep: String,
+    type: String,
     required: true,
   },
   email: {
-    tyep: String,
+    type: String,
   },
 });
 
-const studentSchema = new Schema<Student>({
-  id: {
-    tyep: String,
-    required: true,
+const studentSchema = new Schema<Student>(
+  {
+    id: {
+      type: String,
+      required: true,
+    },
+    name: userNameSchema,
+    gender: ['male', 'female'],
+    dateOfBirth: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    contactNo: {
+      type: String,
+      required: true,
+    },
+    emergencyContactNo: {
+      type: String,
+      required: true,
+    },
+    bloodGroup: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+    presentAddress: {
+      type: String,
+      required: true,
+    },
+    permanentAddress: {
+      type: String,
+      required: true,
+    },
+    guardian: guardianSchema,
+    localGuardian: localGuardianSchema,
+    profileImg: {
+      type: String,
+    },
+    isActive: ['active', 'inactive'],
   },
-  name: userNameSchema,
-  gender: ['male', 'female'],
-  dataOfBirth: {
-    tyep: String,
-    required: true,
-  },
-  email: {
-    tyep: String,
-    required: true,
-  },
-  contactNo: {
-    tyep: String,
-    required: true,
-  },
-  emergencyContactNo: {
-    tyep: String,
-    required: true,
-  },
-  bloodGroup: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
-  presentAdress: {
-    tyep: String,
-    required: true,
-  },
-  permanentAdress: {
-    tyep: String,
-    required: true,
-  },
-  guardian: guardianSchema,
-  localGuardian: localGuardianSchema,
-  profileImg: {
-    tyep: String,
-  },
-  isActive: ['active', 'inactive'],
-});
+  { timestamps: true },
+);
 
 export const StudentModel = model<Student>('Student', studentSchema);
