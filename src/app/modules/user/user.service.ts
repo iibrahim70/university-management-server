@@ -5,13 +5,11 @@ import { IUser } from './user.interface';
 import { User } from './user.model';
 
 const createStudentIntoDB = async (password: string, studentData: IStudent) => {
-  console.log(studentData);
   // create a user object
   const userData: Partial<IUser> = {};
 
   // if password is not given, use default password
   userData.password = password || (config.defaultPass as string);
-  console.log(userData);
 
   // set student role
   userData.role = 'student';
@@ -21,7 +19,6 @@ const createStudentIntoDB = async (password: string, studentData: IStudent) => {
 
   // create a user
   const newUser = await User.create(userData);
-  console.log(newUser);
 
   // create a student
   if (Object.keys(newUser).length) {
