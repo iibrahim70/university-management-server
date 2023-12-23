@@ -5,8 +5,6 @@ import {
   IStudent,
   IUserName,
 } from './student.interface';
-import bcrypt from 'bcrypt';
-import config from '../../config';
 
 const userNameSchema = new Schema<IUserName>(
   {
@@ -104,13 +102,14 @@ const studentSchema = new Schema<IStudent>(
       required: true,
       unique: true,
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      unique: true,
+      ref: 'User',
+    },
     name: {
       type: userNameSchema,
-      required: true,
-    },
-    password: {
-      type: String,
-      maxlength: 20,
       required: true,
     },
     gender: {
@@ -162,32 +161,8 @@ const studentSchema = new Schema<IStudent>(
     profileImg: {
       type: String,
     },
-    isActive: {
-      type: String,
-      enum: ['active', 'inactive'],
-      default: 'active',
-    },
   },
   { timestamps: true },
 );
-
-// pre save middleware
-studentSchema.pre('save', async function (next) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const user = this;
-  // hashing password and save into db
-
-  user.password = await bcrypt.hash(
-    user.password,
-    Number(config.bcryptSaltRounds),
-  );
-  next();
-});
-
-// post save middleware
-studentSchema.post('save', function (doc, next) {
-  doc.password = '';
-  next();
-});
 
 export const Student = model<IStudent>('Student', studentSchema);

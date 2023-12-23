@@ -8,4 +8,5 @@ export default {
   mongoURI: process.env.MONGO_URI,
   dbName: process.env.DB_Name,
   bcryptSaltRounds: process.env.BCRYPT_SALT_ROUNDS,
+  defaultPass: process.env.DEFAULT_PASS,
 };
