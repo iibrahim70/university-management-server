@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
-const app = express();
 import cors from 'cors';
+const app = express();
 import { studentRoutes } from './app/modules/student/student.route';
 
 // parsers
