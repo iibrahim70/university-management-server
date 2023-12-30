@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
-const userNameSchema = z.object({
+const userNameValidationSchema = z.object({
   firstName: z.string(),
   middleName: z.string(),
   lastName: z.string(),
 });
 
-const guardianSchema = z.object({
+const guardianValidationSchema = z.object({
   fatherName: z.string(),
   fatherOccupation: z.string(),
   fatherContactNo: z.string(),
@@ -17,27 +17,28 @@ const guardianSchema = z.object({
   motherEmail: z.string(),
 });
 
-const localGuardianSchema = z.object({
+const localGuardianValidationSchema = z.object({
   name: z.string(),
   occupation: z.string(),
   contactNo: z.string(),
   email: z.string(),
 });
 
-const studentValidationSchema = z.object({
-  id: z.string(),
-  name: userNameSchema,
-  gender: z.enum(['male', 'female', 'other']),
-  dateOfBirth: z.string(),
-  email: z.string(),
-  contactNo: z.string(),
-  emergencyContactNo: z.string(),
-  bloodGroup: z.enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
-  presentAddress: z.string(),
-  permanentAddress: z.string(),
-  guardian: guardianSchema,
-  localGuardian: localGuardianSchema,
-  profileImg: z.string(),
+const createStudentValidationSchema = z.object({
+  body: z.object({
+    name: userNameValidationSchema,
+    gender: z.enum(['male', 'female', 'other']),
+    dateOfBirth: z.string(),
+    email: z.string(),
+    contactNo: z.string(),
+    emergencyContactNo: z.string(),
+    bloodGroup: z.enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
+    presentAddress: z.string(),
+    permanentAddress: z.string(),
+    guardian: guardianValidationSchema,
+    localGuardian: localGuardianValidationSchema,
+    profileImg: z.string(),
+  }),
 });
 
-export default studentValidationSchema;
+export default createStudentValidationSchema;

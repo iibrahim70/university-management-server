@@ -97,11 +97,6 @@ const localGuardianSchema = new Schema<ILocalGuardian>(
 
 const studentSchema = new Schema<IStudent>(
   {
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     user: {
       type: Schema.Types.ObjectId,
       required: true,
