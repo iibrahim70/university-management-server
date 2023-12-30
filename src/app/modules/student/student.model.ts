@@ -113,7 +113,7 @@ const studentSchema = new Schema<IStudent>(
       required: true,
     },
     dateOfBirth: {
-      type: String,
+      type: Date,
       required: true,
     },
     email: {
