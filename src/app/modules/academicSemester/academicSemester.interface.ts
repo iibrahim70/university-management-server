@@ -18,7 +18,7 @@ export type TMonths =
 export interface IAcademicSemester {
   name: TAcademicSemesterName;
   code: TAcademicSemesterCode;
-  year: Date;
+  year: string;
   startMonth: TMonths;
   endMonth: TMonths;
 }
